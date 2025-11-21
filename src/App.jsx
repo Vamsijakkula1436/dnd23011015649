@@ -531,7 +531,7 @@ function App() {
   const [gridSeed, setGridSeed] = useState(0);
   const [browseKind, setBrowseKind] = useState("all"); // all | movie | series
 
-  // Disable background scroll when detail open (fix for browse + home)
+  // Disable background scroll when detail open
   useEffect(() => {
     if (selected) {
       const previous = document.body.style.overflow;
@@ -623,7 +623,7 @@ function App() {
 
   return (
     <div className="app-root">
-      {/* Netflix-style wallpaper made from your posters */}
+      {/* Netflix-style wallpaper */}
       <BackgroundGrid items={backgroundPosters} animated={isHome} />
 
       <div className="app-shell">
@@ -659,7 +659,7 @@ function App() {
           </div>
         </header>
 
-        {/* Browse-mode top controls (Movies/Series filter) */}
+        {/* Browse-mode filters */}
         {isBrowse && (
           <div className="browse-topbar">
             <div className="browse-kind-filters">
@@ -697,7 +697,7 @@ function App() {
           </div>
         )}
 
-        {/* Universe filter chips */}
+        {/* Universe filters */}
         <div className="filter-row">
           {UNIVERSE_FILTERS.map((u) => (
             <button
