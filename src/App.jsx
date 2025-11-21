@@ -659,10 +659,9 @@ function App() {
           </div>
         </header>
 
-        {/* Browse-mode top controls (Home + Movies/Series filter) */}
+        {/* Browse-mode top controls (Movies/Series filter) */}
         {isBrowse && (
           <div className="browse-topbar">
-
             <div className="browse-kind-filters">
               <button
                 type="button"
