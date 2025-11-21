@@ -398,6 +398,7 @@ function DetailPanel({ item, onClose }) {
                   letterSpacing: "1px",
                   margin: 0,
                   textShadow: "0 4px 18px #0008",
+                  textAlign: "center",
                 }}
               >
                 {item.title}
@@ -419,7 +420,7 @@ function DetailPanel({ item, onClose }) {
                   paddingTop: 5,
                 }}
               >
-                ▼ Click to flip for details
+                ▼ Tap / click to flip for details
               </div>
             </div>
           </div>
@@ -507,10 +508,10 @@ function DetailPanel({ item, onClose }) {
                 textAlign: "center",
                 color: "#ddd",
                 fontSize: 15,
-                padding: "14px 0 0",
+                padding: "14px 0 6px",
               }}
             >
-              ◄ Click to flip back
+              ◄ Tap / click to flip back
             </div>
           </div>
         </div>
@@ -531,7 +532,7 @@ function App() {
   const [gridSeed, setGridSeed] = useState(0);
   const [browseKind, setBrowseKind] = useState("all"); // all | movie | series
 
-  // Disable background scroll when detail open
+  // Disable background scroll when detail open (fix for browse + home)
   useEffect(() => {
     if (selected) {
       const previous = document.body.style.overflow;
@@ -623,7 +624,7 @@ function App() {
 
   return (
     <div className="app-root">
-      {/* Netflix-style wallpaper */}
+      {/* Netflix-style wallpaper made from your posters */}
       <BackgroundGrid items={backgroundPosters} animated={isHome} />
 
       <div className="app-shell">
@@ -659,7 +660,7 @@ function App() {
           </div>
         </header>
 
-        {/* Browse-mode filters */}
+        {/* Browse-mode top controls (Movies/Series filter only) */}
         {isBrowse && (
           <div className="browse-topbar">
             <div className="browse-kind-filters">
@@ -697,7 +698,7 @@ function App() {
           </div>
         )}
 
-        {/* Universe filters */}
+        {/* Universe filter chips */}
         <div className="filter-row">
           {UNIVERSE_FILTERS.map((u) => (
             <button

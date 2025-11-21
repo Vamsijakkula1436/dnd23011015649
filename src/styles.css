@@ -220,24 +220,9 @@ body {
 .browse-topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 14px;
   gap: 12px;
-}
-
-.home-chip {
-  padding: 7px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.7);
-  background: #020617;
-  color: var(--text-soft);
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.home-chip:hover {
-  border-color: var(--accent);
-  color: var(--text);
 }
 
 .browse-kind-filters {
@@ -609,9 +594,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  /* important for the flickering scrollbars on flip */
-  overflow: hidden;
 }
 
 /* darken behind panel for readability */
@@ -631,7 +613,7 @@ body {
 .detail-panel {
   position: relative;
   width: min(1100px, 96vw);
-  max-height: 86vh;
+  max-height: 90vh;
   border-radius: 28px;
   background: radial-gradient(
       circle at top left,
@@ -683,22 +665,28 @@ body {
   height: 100%;
   backface-visibility: hidden;
   background: inherit;
+  display: flex;
+  flex-direction: column;
+  /* IMPORTANT: allow scrolling inside the face */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 4px; /* space so hidden scrollbar doesn’t clip content */
+}
+
+/* hide scrollbars visually but keep scrollability */
+.flip-card-front::-webkit-scrollbar,
+.flip-card-back::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .flip-card-front {
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .flip-card-back {
   transform: rotateY(180deg);
   z-index: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .detail-close {
@@ -874,6 +862,7 @@ body {
   .top-bar {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
   }
 
   .top-bar-right {
@@ -885,90 +874,47 @@ body {
     width: 60%;
   }
 
+  .detail-panel {
+    width: 96vw;
+    max-height: 92vh;
+    padding: 18px 16px 18px;
+    border-radius: 22px;
+  }
+
+  .flip-card {
+    min-height: 0;
+  }
+
   .detail-main {
     grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
 
   .detail-poster {
     max-width: 260px;
+    margin: 0 auto;
   }
 
   .detail-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  /* Extra small screens (phones) ------------------------------------------- */
-@media (max-width: 640px) {
-  .app-shell {
-    padding: 14px 10px 22px;
-  }
 
+  .detail-title {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 600px) {
   .app-title {
-    font-size: 24px;
-    line-height: 1.2;
+    font-size: 28px;
   }
 
-  .app-subtitle {
-    font-size: 13px;
-  }
-
-  .top-bar {
-    gap: 12px;
-  }
-
-  .top-bar-right {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-
-  .search-wrapper {
-    width: 100%;
-  }
-
-  .browse-topbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .browse-kind-filters {
-    flex-wrap: wrap;
-  }
-
-  .filter-row {
-    gap: 8px;
+  .section {
+    padding: 16px 14px 18px;
   }
 
   .media-card {
     min-width: 220px;
     max-width: 220px;
   }
-
-  .browse-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
-
-  .detail-backdrop {
-    align-items: flex-start;
-    justify-content: center;
-  }
-
-  .detail-panel {
-    width: 100vw;
-    max-height: 100vh;
-    border-radius: 0;
-    padding: 18px 14px 20px;
-  }
-
-  .detail-main {
-    gap: 16px;
-  }
-
-  .detail-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
 }
